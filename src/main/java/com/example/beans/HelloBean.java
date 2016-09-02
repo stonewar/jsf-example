@@ -1,10 +1,14 @@
-package com.example;
+package com.example.beans;
 
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.inject.Inject;
+
+import com.example.common.Greeting;
+import com.example.qualifier.Informal;
 
 /**
  *
@@ -13,6 +17,13 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean(name = "helloBean")
 @RequestScoped
 public class HelloBean implements Serializable{
+	
+	@Inject
+	private Greeting formalGreeting;
+	
+	@Inject
+	@Informal
+	private Greeting informalGreeting;
 
 	/**
 	 * 
@@ -21,11 +32,12 @@ public class HelloBean implements Serializable{
 
 	@PostConstruct
 	public void init(){
-		System.out.println("HelloWorld started!");
+		System.out.println(HelloBean.class.getName()+" started!");
+		System.out.println("Informal Greeting: "+informalGreeting.greet("World"));
 	}
 
 	public String hello() {
-		return "Hello World";
+		return formalGreeting.greet("World");
 	}
 
 }
