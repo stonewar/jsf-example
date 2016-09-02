@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import com.example.common.Greeting;
 import com.example.qualifier.Informal;
+import com.example.qualifier.StandardInformal;
 
 /**
  *
@@ -24,6 +25,10 @@ public class HelloBean implements Serializable{
 	@Inject
 	@Informal
 	private Greeting informalGreeting;
+	
+	@Inject
+	//@StandardInformal
+	private String infStandGreete;
 
 	/**
 	 * 
@@ -33,6 +38,7 @@ public class HelloBean implements Serializable{
 	@PostConstruct
 	public void init(){
 		System.out.println(HelloBean.class.getName()+" started!");
+		System.out.println("Standard Informal Greeting: "+infStandGreete);
 		System.out.println("Informal Greeting: "+informalGreeting.greet("World"));
 	}
 
